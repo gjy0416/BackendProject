@@ -1,0 +1,58 @@
+@charset "UTF-8";
+ #content {
+     width: 1300px;
+     margin: 30px auto;
+ }
+ #content_header span {
+     font-size: 1.1em;
+ }
+ #content_header input {
+     height: 30px;
+     width: 500px;
+     padding: 3px;
+ }
+ #buttons {
+     width: 100%;
+     padding: 20px 0;
+ }
+ #buttons select {
+     width: 90px;
+     height: 25px;
+     float: left;
+     margin-right: 5px;
+ }
+ #buttons button {
+     width: 25px;
+     height: 25px;
+     float: left;
+     margin-left: 5px;
+ }
+ #buttons img {
+ 		width: 100%;
+ 		height: 100%;
+ }
+ #content_text {
+     width: 100%;
+     height: 500px;
+     border: 1px solid black;
+     padding: 10px;
+     margin-top: 20px;
+     overflow: scroll;
+ }
+ #htmlContainer {
+ 	display: none;
+ }
+ #wrap_button {
+     width: 100%;
+     margin-top: 10px;
+ }
+ #wrap_button button {
+     padding: 10px;
+     border: none;
+     color: white;
+     background-color: skyblue;
+     border-radius: 3px;
+     font-weight: bold;
+     font-size: 1.1em;
+     cursor: pointer;
+ }

@@ -1,0 +1,53 @@
+/*@@@@@@@@@@@footer 시작@@@@@@@@@@@@@@@@@@@@@*/
+#menu_bottom_background{
+    width: 100%;
+    background-color: #EDEDED;
+}
+#footer {
+    width: 1400px;
+    margin: auto;
+    padding: 20px 0 20px 0;
+}
+#wrap_menu_footer {
+    margin-top: 30px;
+    height: 100px;
+}
+#wrap_menu_footer ul {
+    display: block;
+    float: left;
+}
+#wrap_menu_footer li {
+    margin-right: 10px;
+    display: inline-block;
+}
+#wrap_menu_footer a {
+    font-weight: bold;
+    color: rgb(128, 128, 128);
+    font-size: 1.1em;
+}
+#wrap_footer_icon {
+    float: right;
+}
+#wrap_footer_icon img {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+}
+#footer_info_bottom {
+    width: 100%;
+    clear: both;
+}
+#footer_info_bottom p {
+    display: inline-block;
+    color: rgba(128, 128, 128, 0.5);
+}
+#footer_info_bottom select {
+    float: right;
+    background-color: rgba(128, 128, 128, 0.5);
+    color: white;
+    padding: 20px 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+    border-radius: 10px;
+    border: none;
+}
