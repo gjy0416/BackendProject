@@ -66,42 +66,42 @@ public class boardDAOImpl implements boardDAO {
 				innerSql = "WHERE SORT = '후기' ";
 			else if (sort.equals("여행 추천"))
 				innerSql = "WHERE SORT = '여행 친구 찾기' ";
-			sql = "SELECT BRD_NO bNum, (SELECT ID FROM USERS WHERE USER_NO = A.USER_NO) bUserId, SORT bSort, TITLE bTitle, COUNT bCount, TO_CHAR(CREATE_DATE,'YY/MM/DD hh:mi') bCDate, bRcm, bUserGradeImgAdd "
-					+ "								FROM (SELECT ROWNUM RN, BRD_NO, USER_NO, SORT, TITLE, COUNT, CREATE_DATE, bRcm, (SELECT IMG_ADD FROM LIST_GRADE WHERE F = GRADE_NO) bUserGradeImgAdd "
-					+ "									FROM (SELECT BRD_NO, USER_NO, SORT, TITLE, COUNT, CREATE_DATE,"
+			sql = "SELECT A.BRD_NO bNum, (SELECT ID FROM USERS WHERE USER_NO = A.USER_NO) bUserId, A.SORT bSort, A.TITLE bTitle, A.COUNT bCount, TO_CHAR(A.CREATE_DATE,'YY/MM/DD hh:mi') bCDate, bRcm, bUserGradeImgAdd "
+					+ "								FROM (SELECT ROWNUM RN, C.*, (SELECT IMG_ADD FROM LIST_GRADE WHERE F = GRADE_NO) bUserGradeImgAdd "
+					+ "									FROM (SELECT B.*,"
 					+ "					                         (SELECT COUNT(1) FROM RCM_BRD_FREE A WHERE A.BRD_NO = B.BRD_NO) bRcm,"
 					+ "                                                (SELECT GRADE_NO FROM USERS WHERE USER_NO = B.USER_NO) F "
 					+ "					                         FROM BOARD_FREE B "
 																			 +innerSql
-					+ "					                         ORDER BY BRD_NO DESC)) A "
+					+ "					                         ORDER BY BRD_NO DESC) C) A "
 					+ "								WHERE RN BETWEEN ? AND ?";
 		}
 		else if (boardType.equals("travel"))
-			sql = "SELECT BRD_NO bNum, (SELECT ID FROM USERS WHERE USER_NO = A.USER_NO) bUserId, TITLE bTitle, COUNT bCount, TO_CHAR(CREATE_DATE,'YY/MM/DD hh:mi') bCDate, bRcm, bUserGradeImgAdd "
-					+ "								FROM (SELECT ROWNUM RN, BRD_NO, USER_NO, TITLE, COUNT, CREATE_DATE, bRcm, (SELECT IMG_ADD FROM LIST_GRADE WHERE F = GRADE_NO) bUserGradeImgAdd "
-					+ "									FROM (SELECT BRD_NO, USER_NO, TITLE, COUNT, CREATE_DATE,"
+			sql = "SELECT A.BRD_NO bNum, (SELECT ID FROM USERS WHERE USER_NO = A.USER_NO) bUserId, A.TITLE bTitle, A.COUNT bCount, TO_CHAR(A.CREATE_DATE,'YY/MM/DD hh:mi') bCDate, bRcm, bUserGradeImgAdd "
+					+ "								FROM (SELECT ROWNUM RN, C.*, (SELECT IMG_ADD FROM LIST_GRADE WHERE F = GRADE_NO) bUserGradeImgAdd "
+					+ "									FROM (SELECT B.*,"
 					+ "					                         (SELECT COUNT(1) FROM RCM_BRD_TRV A WHERE A.BRD_NO = B.BRD_NO) bRcm,"
 					+ "                                                (SELECT GRADE_NO FROM USERS WHERE USER_NO = B.USER_NO) F "
 					+ "					                         FROM BOARD_TRAVEL B "
-					+ "					                         ORDER BY BRD_NO DESC)) A "
+					+ "					                         ORDER BY BRD_NO DESC) C) A "
 					+ "								WHERE RN BETWEEN ? AND ?";
 		else if (boardType.equals("notice"))
-			sql = "SELECT BRD_NO bNum, (SELECT ID FROM USERS WHERE USER_NO = A.USER_NO) bUserId, TITLE bTitle, COUNT bCount, TO_CHAR(CREATE_DATE,'YY/MM/DD hh:mi') bCDate, bRcm, bUserGradeImgAdd "
-					+ "								FROM (SELECT ROWNUM RN, BRD_NO, USER_NO, TITLE, COUNT, CREATE_DATE, bRcm, (SELECT IMG_ADD FROM LIST_GRADE WHERE F = GRADE_NO) bUserGradeImgAdd "
-					+ "									FROM (SELECT BRD_NO, USER_NO, TITLE, COUNT, CREATE_DATE,"
+			sql = "SELECT A.BRD_NO bNum, (SELECT ID FROM USERS WHERE USER_NO = A.USER_NO) bUserId, A.TITLE bTitle, A.COUNT bCount, TO_CHAR(A.CREATE_DATE,'YY/MM/DD hh:mi') bCDate, bRcm, bUserGradeImgAdd "
+					+ "								FROM (SELECT ROWNUM RN, C.*, (SELECT IMG_ADD FROM LIST_GRADE WHERE F = GRADE_NO) bUserGradeImgAdd "
+					+ "									FROM (SELECT B.*,"
 					+ "					                         (SELECT COUNT(1) FROM RCM_BRD_NOTICE A WHERE A.BRD_NO = B.BRD_NO) bRcm,"
 					+ "                                                (SELECT GRADE_NO FROM USERS WHERE USER_NO = B.USER_NO) F "
 					+ "					                         FROM BOARD_NOTICE B "
-					+ "					                         ORDER BY BRD_NO DESC)) A "
+					+ "					                         ORDER BY BRD_NO DESC) C) A "
 					+ "								WHERE RN BETWEEN ? AND ?";
 		else 
-			sql = "SELECT BRD_NO bNum, (SELECT ID FROM USERS WHERE USER_NO = A.USER_NO) bUserId, TITLE bTitle, COUNT bCount, TO_CHAR(CREATE_DATE,'YY/MM/DD hh:mi') bCDate, IMG_LIST_ADD bImgListAdd, bRcm, bUserGradeImgAdd "
-					+ "								FROM (SELECT ROWNUM RN, BRD_NO, USER_NO, TITLE, COUNT, CREATE_DATE, IMG_LIST_ADD, bRcm, (SELECT IMG_ADD FROM LIST_GRADE WHERE F = GRADE_NO) bUserGradeImgAdd "
-					+ "									FROM (SELECT BRD_NO, USER_NO, TITLE, COUNT, CREATE_DATE, IMG_LIST_ADD,"
+			sql = "SELECT A.BRD_NO bNum, (SELECT ID FROM USERS WHERE USER_NO = A.USER_NO) bUserId, A.TITLE bTitle, A.COUNT bCount, TO_CHAR(A.CREATE_DATE,'YY/MM/DD hh:mi') bCDate, A.IMG_LIST_ADD bImgListAdd, bRcm, bUserGradeImgAdd "
+					+ "								FROM (SELECT ROWNUM RN, C.*, (SELECT IMG_ADD FROM LIST_GRADE WHERE F = GRADE_NO) bUserGradeImgAdd "
+					+ "									FROM (SELECT B.*,"
 					+ "					                         (SELECT COUNT(1) FROM RCM_BRD_EVENT A WHERE A.BRD_NO = B.BRD_NO) bRcm,"
 					+ "                                                (SELECT GRADE_NO FROM USERS WHERE USER_NO = B.USER_NO) F "
 					+ "					                         FROM BOARD_EVENT B "
-					+ "					                         ORDER BY BRD_NO DESC)) A "
+					+ "					                         ORDER BY BRD_NO DESC) C) A "
 					+ "								WHERE RN BETWEEN ? AND ?";
 		
 		Connection conn = null;

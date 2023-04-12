@@ -50,15 +50,15 @@ pageEncoding="UTF-8"%>
           <div class="cont_form_sign_up">
             <a href="#" onclick="hidden_login_and_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
             <h2>회원가입</h2>
-            <form method="post" action="/membership/add" enctype="multipart/form-data">
+            <form method="post" action="/membership/add" enctype="multipart/form-data" onsubmit="return membershipCheck()">
             	<div id="sign_up_idwrap">
 	            	<input id="mUserId" type="text" name ="mUserId" placeholder="아이디" onchange="onchangeCheck()"/>
 		            <button id="checkbtn"type="button" onclick="idDupCheck()">중복확인</button>
             	</div>
-	            <input type="password" name = "mPassword" placeholder="비밀번호"/>
-	            <input type="password" name = "user-pwd" placeholder="비밀번호 확인"/>
-	            <input type="text" name ="mName" placeholder="이름" />
-	            <input type="phone" name = "mPhone" placeholder="휴대전화">
+	            <input id="password1" type="password" name = "mPassword" placeholder="비밀번호"/>
+	            <input id="password2" type="password" name = "user-pwd" placeholder="비밀번호 확인"/>
+	            <input id="input_name"type="text" name ="mName" placeholder="이름" />
+	            <input id="input_phone"type="tel" name = "mPhone" placeholder="휴대전화">
 	            <!-- <input type="tel" id="phone" name="phone" style="cursor: pointer" placeholder="전화번호 입력"> -->
 	            <!-- <a href="#" id="tel-btn">인증번호 받기</a>
 	            <input type="phone" id="tel-btn2" name="tel-btn2" style="cursor: pointer" placeholder="인증번호 입력하세요"> -->
@@ -84,7 +84,7 @@ pageEncoding="UTF-8"%>
 	                <option value="ENFP">ENFP</option>
 	              </select>
 	            </div>
-	            <input type="email" name="mEmail" id="email" style="cursor: pointer" placeholder="본인 확인 이메일(선택)">
+	            <input type="email" name="mEmail" id="email" style="cursor: pointer" placeholder="본인 확인 이메일">
 	            <button class="btn_sign_up" type="submit" onclick="change_to_sign_up()">회원가입</button>
             </form>
           </div>

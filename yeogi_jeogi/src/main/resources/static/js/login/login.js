@@ -55,10 +55,50 @@
 		 alert('비밀번호를 입력해주세요');
 		 return false;
 	 }
+	 
 	 return true;
  }
  function onchangeCheck() {
 	 document.getElementById('checkbtn').disabled = false;
+ }
+ function membershipCheck() {
+	 if (document.getElementById('mUserId').value == '') {
+		 alert('아이디를 입력해주세요');
+		 return false;
+	 }
+	 if (document.getElementById('mUserId').value.length < 5 || document.getElementById('mUserId').value.length > 12) {
+		 alert('아이디는 5자 이상 12자 이하이어야 합니다');
+		 return false;
+	 }
+	 if (document.getElementById('password1').value.length < 8 || document.getElementById('password1').value.length > 20) {
+		 alert('비밀번호는 8자이상 20자 이하여야합니다');
+		 return false;
+	 }
+	 if (document.getElementById('password1').value != document.getElementById('password2').value) {
+		 alert('비밀번호확인이 다릅니다');
+		 return false;
+	 }
+	 if (document.getElementById('checkbtn').disabled == false) {
+		 alert('아이디 중복검사가 필요합니다!');
+		 return false;
+	 }
+	 if (document.getElementById('input_name').value == '') {
+		 alert('이름을 입력해주세요');
+		 return false;
+	 }
+	 if (document.getElementById('input_phone').value == '') {
+		 alert('휴대전화번호를 입력해주세요');
+		 return false;
+	 }
+	 if (document.getElementById('MBTI2').value == 'MBTI') {
+		 alert('MBTI를 선택해주세요');
+		 return false;
+	 }
+	 if (document.getElementById('email').value == '') {
+		 alert('이메일을 입력해주세요');
+		 return false;
+	 }
+	 return true;
  }
  function idDupCheck() {
 	  const id = document.getElementById('mUserId').value;
