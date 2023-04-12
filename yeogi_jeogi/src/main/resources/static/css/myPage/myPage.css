@@ -1,0 +1,64 @@
+@charset "UTF-8";
+#mypage_bar {
+	background-color: #2E9BFF;
+	height: 40px;
+	width: 100%;
+}
+#mypage_bar > div {
+	width: 1400px;
+	height: 100%;
+	margin: 0 auto;
+	padding: 10px 0;
+}
+#mypage_bar span {
+	color: white;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+#myinfo {
+	margin: 30px auto;
+	width: 1400px;
+	height: 150px;
+	border: 1px solid rgba(128,128,128,0.5);
+	border-radius: 15px;
+	padding-left: 280px;
+}
+#info_left {
+	margin-top: 25px;
+	float: left;
+}
+#info_left img {
+	border: 3px solid #2E9BFF;;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	float: left;
+}
+#info_left > div {
+	margin-left: 50px;
+	padding-top: 15px;
+	float: left;
+}
+#info_left > div > span {
+	display: block;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+#info_left > div > span:last-child {
+	margin-top: 30px;
+}
+#myinfo > table {
+	float: right;
+	border-collapse: collapse;
+	height: 80px;
+	margin: 35px 130px 0 0;
+}
+#myinfo td {
+	padding: 0 30px;
+	text-align: center;
+	font-weight: bold;
+}
+#myinfo td:not(:last-child) {
+	border-right: 1px solid rgba(128,128,128,0.5);
+}
+

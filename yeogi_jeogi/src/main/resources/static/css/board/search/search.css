@@ -1,0 +1,137 @@
+#content {
+    width: 1300px;
+    margin: 0 auto;
+}
+#wrap_content_header {
+    width: 100%;
+    margin: 50px 0;
+}
+#content_header {
+    width: 505px;
+    margin: 0 auto;
+}
+#content_header a {
+    display: inline-block;
+    width: 250px;
+    height: 30px;
+    font-size: 1.5em;
+    text-align: center;
+    border-bottom: 3px solid rgba(128, 128, 128, 0.5);
+    color: rgba(128, 128, 128, 0.5);
+    font-weight: bold;
+}
+#content_header input {
+    display: none;
+}
+/* #content_header a:hover {
+    color: black;
+    border-bottom: 3px solid  #2E9BFF;
+} */
+#radio_free:checked ~ label[for="radio_free"] a, #radio_travel:checked ~ label[for="radio_travel"] a {
+    color: black;
+    border-bottom: 3px solid  #2E9BFF;
+}
+#radio_free:not(checked) ~ label[for="radio_free"] a, #radio_travel:not(checked) ~ label[for="radio_travel"] a {
+    border-bottom: 3px solid rgba(128, 128, 128, 0.5);
+    color: rgba(128, 128, 128, 0.5);
+}
+#board{
+    width: 100%;
+}
+#wrap_board_search {
+    width: 100%;
+    height: 35px;
+}
+#board_search {
+    float: right;
+    height: 100%;
+}
+#board_search select {
+	height: 30px;
+	width: 70px;
+	margin: auto 0;
+	padding: 5px;
+	display:block;
+	float: left;
+	border: 3px solid  #2E9BFF;
+	border-right: none;
+}
+#board_search input {
+    border: 3px solid  #2E9BFF;
+    width: 200px;
+    height: 30px;
+    border-radius: 2px;
+    display: block;
+    float: left;
+    margin: auto 0;
+    padding: 5px;
+    font-size: 1.1em;
+}
+#board_search button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    display: block;
+    float: left;
+    cursor: pointer;
+    background-color: #2E9BFF;
+    margin: auto 0 auto 3px;
+    border-radius: 5px;
+}
+#board_search img {
+    width: 100%;
+    height: 100%;
+}
+#board > table {
+    border: 3px solid black;
+    border-collapse: collapse;
+    width: 100%;
+    border-right: none;
+    border-left: none;
+}
+#board th {
+    padding: 15px 12px;
+    border-bottom: 3px solid black;
+    text-align: center;
+}
+#board td {
+    padding: 12px 12px;
+    border-bottom: 1px solid black;
+}
+.board_col {
+    text-align: center;
+}
+#board_sort {
+    width: 50px;
+}
+#board_write {
+    display: block;
+    padding: 10px 15px;
+    border: none;
+    color: white;
+    background-color:  #2E9BFF;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+    float: right;
+    border-radius: 5px;
+}
+#wrap_board_num {
+    width: 100%;
+    height: 50px;
+    margin: 20px;
+}
+#wrap_board_num ul {
+	display: block;
+	margin: 0 auto;
+	width: 200px;
+	text-align: center
+}
+#wrap_board_num li {
+	display: inline-block;
+	margin: 0 5px;
+}
+#wrap_board_num a {
+	font-size: 1.5em;
+	font-weight: bold;
+}
