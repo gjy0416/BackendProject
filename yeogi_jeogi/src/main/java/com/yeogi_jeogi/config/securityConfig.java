@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -57,14 +58,17 @@ public class securityConfig {
 					new AuthenticationSuccessHandler() { // 익명 객체 사용
 						@Override
 						public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-							response.sendRedirect("/main");	
+							String uri = (String) request.getSession().getAttribute("preUri");
+							if (uri != null)
+								response.sendRedirect(uri);
+							else
+								response.sendRedirect("/main");
 						}
 					})
 				.failureHandler( // 로그인 실패 후 핸들러
 					new AuthenticationFailureHandler() { // 익명 객체 사용
 						@Override
 						public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-							System.out.println("exception: " + exception.getMessage());
 							response.sendRedirect("/loginform");
 						}
 					})
@@ -73,7 +77,14 @@ public class securityConfig {
 				.logout()
 					.permitAll()
 					.logoutUrl("/logout") // 로그아웃 URL (기본 값 : /logout)
-					.logoutSuccessUrl("/main") // 로그아웃 성공 URL (기본 값 : "/login?logout")
+					.logoutSuccessHandler(new LogoutSuccessHandler() {
+						
+						@Override
+						public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+								throws IOException, ServletException {
+							response.sendRedirect(request.getHeader("Referer"));
+						}
+					})
 					.logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // 주소창에 요청해도 포스트로 인식하여 로그아웃
 					.deleteCookies("JSESSIONID") // 로그아웃 시 JSESSIONID 제거
 					.invalidateHttpSession(true) // 로그아웃 시 세션 종료

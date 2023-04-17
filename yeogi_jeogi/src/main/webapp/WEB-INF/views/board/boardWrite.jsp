@@ -6,15 +6,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	 <link rel="stylesheet" href="/css/board/boardWrite.css" type="text/css">
+    <link rel="stylesheet" href="/css/board/boardWrite.css" type="text/css">
 	 <script type="text/javascript" src="/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-	 
 	 <script src="/js/board/boardWrite.js"></script>
-	 
     <title>글 쓰기</title>
 </head>
 <body>
-
     <div id="container">
         <%@include file="../header.jsp" %>
         <div id="content">
@@ -55,20 +52,16 @@
 <!-- 	                </div> -->
 	            </div>
 <!-- 	            <div id="content_text" contenteditable="true"></div> -->
-	            <textarea id="content_text" name="content_text" placeholder="내용을 입력해주세요" style="width: 100%;"></textarea>
+	            <textarea id="content_text" name="content_text" placeholder="내용을 입력해주세요" style="width: 100%; min-height: 500px;"></textarea>
 	            <script>
 					    let oEditors = [];
-					    function abc() {
-					      console.log("Naver SmartEditor");
 					      nhn.husky.EZCreator.createInIFrame({
 					        oAppRef: oEditors,
 					        elPlaceHolder: document.getElementById('content_text'),
 					        sSkinURI: "/smarteditor/SmartEditor2Skin.html",
 					        fCreator: "createSEditor2"
-					      })
-					    };
-					    abc();
-	 </script>
+					      });
+	 				</script>
 	            <input id="htmlContainer" type="text" name="bContent" value="">
 	            <input id="test1" type="hidden" name="bUserId" value="${principal.getlUserId()}">
 	            <div id="wrap_button">
