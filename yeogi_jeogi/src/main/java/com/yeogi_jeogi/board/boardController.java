@@ -2,6 +2,7 @@ package com.yeogi_jeogi.board;
 
 import java.util.LinkedList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.core.task.TaskRejectedException;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yeogi_jeogi.login.loginUserData;
@@ -139,9 +139,10 @@ public class boardController {
 			if (principal == null)
 				return "myPage/myPageFail";
 			if (boardType.equals("free") || boardType.equals("travel") || boardType.equals("event") || boardType.equals("notice")) {
+				String content = bd.getBContent().replace("\uFEFF", "");
+				bd.setBContent(content);
 				service.boardAsyncService().get().addWrite(boardType, bd);
 			}
-
 			else {
 				return "board/boardFail";
 			}
@@ -192,5 +193,10 @@ public class boardController {
 	@GetMapping("/eventlist")
 	public String eventListPage() {
 		return "board/eventList";
+	}
+	@PostMapping("/seimgupload")
+	public String sImgUpload(HttpServletRequest request) throws Exception {
+		service.imageUpload(request);
+		return "";
 	}
 }

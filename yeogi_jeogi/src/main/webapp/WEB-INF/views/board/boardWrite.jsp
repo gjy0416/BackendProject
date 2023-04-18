@@ -52,7 +52,8 @@
 <!-- 	                </div> -->
 	            </div>
 <!-- 	            <div id="content_text" contenteditable="true"></div> -->
-	            <textarea id="content_text" name="content_text" placeholder="내용을 입력해주세요" style="width: 100%; min-height: 500px;"></textarea>
+	            <textarea id="content_text" name="bContent" placeholder="내용을 입력해주세요" style="width: 100%; min-height: 500px;"></textarea>
+	            <script src="/js/board/boardWrite.js"></script>
 	            <script>
 					    let oEditors = [];
 					      nhn.husky.EZCreator.createInIFrame({
@@ -61,11 +62,16 @@
 					        sSkinURI: "/smarteditor/SmartEditor2Skin.html",
 					        fCreator: "createSEditor2"
 					      });
+					      function test() {
+					    		oEditors.getById["content_text"].exec("UPDATE_CONTENTS_FIELD", []);
+					    		document.getElementById('content_text').value.replace(/%uFEFF/gi, '');
+					    		
+					    	}
 	 				</script>
-	            <input id="htmlContainer" type="text" name="bContent" value="">
 	            <input id="test1" type="hidden" name="bUserId" value="${principal.getlUserId()}">
 	            <div id="wrap_button">
-	                <button type="submit" onclick="getHtml()">글 등록하기</button>
+	                <button type="submit">글 등록하기</button>
+	                <button type="button" onclick="test()">테스트</button>
 	            </div>
             </form>
         </div>

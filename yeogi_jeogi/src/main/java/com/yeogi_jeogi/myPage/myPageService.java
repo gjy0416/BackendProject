@@ -2,6 +2,7 @@ package com.yeogi_jeogi.myPage;
 
 import java.io.File;
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.Future;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -41,9 +42,17 @@ public class myPageService {
 	}
 	public void myPageUpdateInfoService(loginUserData principal, USERS user, MultipartFile profileImg) throws Exception {
 		String fileAdd = "";
+		System.out.println(principal.getlImgAdd());
 		if (profileImg != null) {
+			if (!principal.getlImgAdd().equals("/images/myPage/none_user_img.png")) {
+				File deleteFile = new File(fdir + "/" + principal.getlImgAdd());
+				if (deleteFile.delete())
+					System.out.println("기존 이미지가 삭제되었습니다!");
+				else
+					System.out.println("기존 이미지를 찾을 수 없습니다!");
+			}
 			MultipartFile mFile = profileImg;
-			String rdFileName = randomFileName();
+			String rdFileName = UUID.randomUUID().toString();
 			String fileName = rdFileName+"."+mFile.getOriginalFilename().substring(mFile.getOriginalFilename().lastIndexOf(".")+1);
 //			fileNameList().add(fileName);
 			File file = new File(fdir+"/"+fileName);
@@ -59,17 +68,6 @@ public class myPageService {
 		cdService.updateMyInfo(user);
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getID(), principal.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-	}
-	private String randomFileName() {
-		Random rd = new Random();
-		String [] stringList = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "a", "b"};
-		String fileName = "";
-		int fileNameLength = 10;
-		for (int i = 0; i < fileNameLength; i++) {
-			int randomNum = rd.nextInt(stringList.length);
-			fileName += stringList[randomNum];
-		}
-		return fileName;
 	}
 //	@Bean
 //	public ArrayList<String> fileNameList() {
