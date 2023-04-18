@@ -46,7 +46,7 @@ public class securityConfig {
 				.antMatchers("/board/notice/write", "/board/event/write").hasRole("MANAGER") //관리자 로그인 시 사용가능 페이지
 				.antMatchers("/", "/main", "/loginform", "/board/**","/membership/add", "/products", "/membership/**", "/festival",
 									"/festival/list", "/travel/**").permitAll() // 설정한 리소스의 접근을 인증절차 없이 허용
-				.antMatchers("/css/**", "/images/**", "/js/**", "/smarteditor/**").permitAll() //static 요소들
+				.antMatchers("/css/**", "/images/**", "/js/**", "/smarteditor/**", "/uploadImages/**").permitAll() //static 요소들
 				.anyRequest().authenticated() // 그 외 모든 리소스를 의미하며 인증 필요
 				.and()
 			.formLogin()

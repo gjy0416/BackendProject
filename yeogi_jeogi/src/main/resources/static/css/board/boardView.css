@@ -76,6 +76,9 @@
 	min-height: 500px;
 	padding: 20px 10px;
 }
+#content_main * {
+	max-width: 100%;
+}
 #comment {
     margin: 0 auto;
     width: 100%;

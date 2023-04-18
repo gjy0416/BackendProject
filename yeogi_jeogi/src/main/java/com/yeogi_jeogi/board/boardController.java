@@ -1,8 +1,11 @@
 package com.yeogi_jeogi.board;
 
+import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.core.task.TaskRejectedException;
@@ -195,8 +198,9 @@ public class boardController {
 		return "board/eventList";
 	}
 	@PostMapping("/seimgupload")
+	@ResponseBody
 	public String sImgUpload(HttpServletRequest request) throws Exception {
-		service.imageUpload(request);
-		return "";
+		String result = service.imageUpload(request);
+		return result;
 	}
 }

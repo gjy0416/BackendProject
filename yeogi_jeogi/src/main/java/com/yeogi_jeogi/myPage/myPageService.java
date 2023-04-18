@@ -42,10 +42,9 @@ public class myPageService {
 	}
 	public void myPageUpdateInfoService(loginUserData principal, USERS user, MultipartFile profileImg) throws Exception {
 		String fileAdd = "";
-		System.out.println(principal.getlImgAdd());
 		if (profileImg != null) {
 			if (!principal.getlImgAdd().equals("/images/myPage/none_user_img.png")) {
-				File deleteFile = new File(fdir + "/" + principal.getlImgAdd());
+				File deleteFile = new File(fdir + principal.getlImgAdd().substring(principal.getlImgAdd().indexOf("/", 1)));
 				if (deleteFile.delete())
 					System.out.println("기존 이미지가 삭제되었습니다!");
 				else
@@ -54,7 +53,6 @@ public class myPageService {
 			MultipartFile mFile = profileImg;
 			String rdFileName = UUID.randomUUID().toString();
 			String fileName = rdFileName+"."+mFile.getOriginalFilename().substring(mFile.getOriginalFilename().lastIndexOf(".")+1);
-//			fileNameList().add(fileName);
 			File file = new File(fdir+"/"+fileName);
 			mFile.transferTo(file);
 			fileAdd = "/uploadImages/"+fileName;
@@ -69,9 +67,5 @@ public class myPageService {
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getID(), principal.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
-//	@Bean
-//	public ArrayList<String> fileNameList() {
-//		return new ArrayList<String>();
-//	}
 
 }
