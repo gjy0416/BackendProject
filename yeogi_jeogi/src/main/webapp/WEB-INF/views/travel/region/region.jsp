@@ -107,9 +107,9 @@
 	                <img class ="ck" src="${tList.gettImgAdd()}">
 	                <div id="img">
                        <div>
-                       	<img src="/images/region/찜.png" width="15px"> ${tList.gettRcm()} &nbsp; 
-                        <img src="/images/region/조회수.png" width="15px"> ${tList.gettCount()} &nbsp;
-                        <img src="/images/region/댓글.png" width="15px"> -- 
+                       	<img src="/images/main/heart2.png" width="15px"> ${tList.gettRcm()} &nbsp; 
+                        <img src="/images/main/hits.png" width="15px"> ${tList.gettCount()} &nbsp;
+                        <img src="/images/main/comments.png" width="15px"> -- 
                        </div>
 	                   <h3>${tList.gettRegionName()}</h3>
 	                   <p>${tList.gettName()}</p>
