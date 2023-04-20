@@ -1,6 +1,7 @@
 package com.yeogi_jeogi.config;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -22,10 +25,18 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.yeogi_jeogi.login.USERS;
+import com.yeogi_jeogi.login.UserRepository;
+import com.yeogi_jeogi.login.customAuthenticationToken;
+
+import lombok.RequiredArgsConstructor;
+
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class securityConfig {
 	
+	final UserRepository repository;
 	@Bean
    public PasswordEncoder passwordEncoder() {
        return new BCryptPasswordEncoder();
@@ -41,6 +52,19 @@ public class securityConfig {
 			.csrf().disable()
 			.cors().disable()
 			.headers().frameOptions().sameOrigin().and()
+//			.authenticationManager(new AuthenticationManager() {
+//				@Override
+//				public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+//					USERS user = repository.findByID(authentication.getName()).orElseThrow(() -> {
+//						return new IllegalArgumentException("회원 찾기 실패");
+//					});
+//					ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+//					auth.add(new SimpleGrantedAuthority("ROLE_"+user.getROLE()));
+//					System.out.println("아이디"+user.getID()+"비번"+user.getPASSWORD());
+//					
+//					return new customAuthenticationToken(user, user.getPASSWORD(), user.getIMG_ADD(), auth);
+//				}
+//			})
 			.authorizeRequests()
 				.antMatchers("/mypage","/mypage/**", "/board/free/write", "/board/travel/write", "/mypage/coms/delete/**").hasAnyAuthority("ROLE_USER", "ROLE_MANAGER") //유저, 관리자 로그인 시 사용가능 페이지
 				.antMatchers("/board/notice/write", "/board/event/write").hasRole("MANAGER") //관리자 로그인 시 사용가능 페이지
