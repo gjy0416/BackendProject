@@ -47,9 +47,6 @@
 						 	else if (boardType == 'travel') {
 						 		document.getElementById('content_header').firstChild.nextSibling.setAttribute('checked', true);
 						 	}
-						 	else if (boardType == 'event') {
-						 		document.getElementById('content_header').firstChild.setAttribute('checked', true);
-						 	}
 						 	else if (boardType == 'notice') {
 						 		document.getElementById('content_header').firstChild.nextSibling.setAttribute('checked', true);
 						 	}

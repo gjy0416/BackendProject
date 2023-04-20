@@ -62,46 +62,46 @@
 	 document.getElementById('checkbtn').disabled = false;
  }
  function membershipCheck() {
-	 if (document.getElementById('mUserId').value == '') {
+	 if ($('#mUserId').val() == '') {
 		 alert('아이디를 입력해주세요');
 		 return false;
 	 }
-	 if (document.getElementById('mUserId').value.length < 5 || document.getElementById('mUserId').value.length > 12) {
+	 if ($('#mUserId').val().length < 5 || $('#mUserId').val().length > 12) {
 		 alert('아이디는 5자 이상 12자 이하이어야 합니다');
 		 return false;
 	 }
-	 if (document.getElementById('password1').value.length < 8 || document.getElementById('password1').value.length > 20) {
+	 if ($('#password1').val().length < 8 || $('#password1').val().length > 20) {
 		 alert('비밀번호는 8자이상 20자 이하여야합니다');
 		 return false;
 	 }
-	 if (document.getElementById('password1').value != document.getElementById('password2').value) {
+	 if ($('#password1').val() != $('#password2').val()) {
 		 alert('비밀번호확인이 다릅니다');
 		 return false;
 	 }
-	 if (document.getElementById('checkbtn').disabled == false) {
+	 if ($('#checkbtn').disabled == false) {
 		 alert('아이디 중복검사가 필요합니다!');
 		 return false;
 	 }
-	 if (document.getElementById('input_name').value == '') {
+	 if ($('#input_name').val() == '') {
 		 alert('이름을 입력해주세요');
 		 return false;
 	 }
-	 if (document.getElementById('input_phone').value == '') {
+	 if ($('#input_phone').val() == '') {
 		 alert('휴대전화번호를 입력해주세요');
 		 return false;
 	 }
-	 if (document.getElementById('MBTI2').value == 'MBTI') {
+	 if ($('#MBTI2').val() == 'MBTI') {
 		 alert('MBTI를 선택해주세요');
 		 return false;
 	 }
-	 if (document.getElementById('email').value == '') {
+	 if ($('#email').val() == '') {
 		 alert('이메일을 입력해주세요');
 		 return false;
 	 }
 	 return true;
  }
  function idDupCheck() {
-	  const id = document.getElementById('mUserId').value;
+	  const id = $('#mUserId').val();
 		 $.ajax({
 			 type: 'post',
 			 url: '/membership/check',
@@ -110,7 +110,7 @@
 			 success: function(data) {
 				 if (data) {
 				 	alert('아이디 사용가능합니다');
-				 	document.getElementById('checkbtn').disabled = true;
+				 	$('#checkbtn').disabled = true;
 				 }
 				 else {
 					alert('아이디가 중복됩니다!');

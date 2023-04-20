@@ -1,7 +1,6 @@
 package com.yeogi_jeogi.myPage;
 
 import java.io.File;
-import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
@@ -42,7 +41,7 @@ public class myPageService {
 	}
 	public void myPageUpdateInfoService(loginUserData principal, USERS user, MultipartFile profileImg) throws Exception {
 		String fileAdd = "";
-		if (profileImg != null) {
+		if (profileImg != null && !profileImg.isEmpty()) {
 			if (!principal.getlImgAdd().equals("/images/myPage/none_user_img.png")) {
 				File deleteFile = new File(fdir + principal.getlImgAdd().substring(principal.getlImgAdd().indexOf("/", 1)));
 				if (deleteFile.delete())
@@ -63,8 +62,8 @@ public class myPageService {
 		}
 		user.setID(principal.getlUserId());
 		user.setUSER_NO(principal.getlUserNum());
-		cdService.updateMyInfo(user);
-		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getID(), principal.getPassword()));
+		user = cdService.updateMyInfo(user);
+		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getID(), user.getPASSWORD()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 

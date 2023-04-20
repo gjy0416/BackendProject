@@ -1,11 +1,8 @@
 package com.yeogi_jeogi.board;
 
-import java.io.PrintWriter;
-import java.net.URLEncoder;
 import java.util.LinkedList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.core.task.TaskRejectedException;
@@ -17,7 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.yeogi_jeogi.login.loginUserData;
 
@@ -62,8 +61,6 @@ public class boardController {
 	@PostMapping("/board/freesort")
 	@ResponseBody
 	public boolean boardSortList(Model m, @RequestBody String sort) {
-		System.out.println("컨트롤러 들어옴 sort = "+sort);
-		
 		LinkedList<board> bd;
 		int pageNum = 15;
 		try {
@@ -75,7 +72,6 @@ public class boardController {
 			m.addAttribute("pageNum", pageNum);
 			m.addAttribute("pageColor", 1);
 			m.addAttribute("boardType", "free");
-			System.out.println("컨트롤러 끝");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -158,6 +154,12 @@ public class boardController {
 		}
 		return "redirect:/board/{boardType}";
 	}
+	@PostMapping("/seimgupload")
+	@ResponseBody
+	public String sImgUpload(HttpServletRequest request) throws Exception {
+		String result = service.imageUpload(request);
+		return result;
+	}
 	@PostMapping("/board/{boardType}/addcom")
 	public String addNewBfComment(@AuthenticationPrincipal loginUserData principal, @PathVariable String boardType, HttpSession session, @ModelAttribute boardComment bdc) {
 		try {
@@ -197,10 +199,5 @@ public class boardController {
 	public String eventListPage() {
 		return "board/eventList";
 	}
-	@PostMapping("/seimgupload")
-	@ResponseBody
-	public String sImgUpload(HttpServletRequest request) throws Exception {
-		String result = service.imageUpload(request);
-		return result;
-	}
+	
 }

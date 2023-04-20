@@ -9,9 +9,7 @@ function setHref() {
 
 	window.location = href;
 }
-function rcmRefresh(){  
-      $("rcm").load(window.location.href + "rcm");
-}
+
 function comContentBlankCheck() {
 	if (document.getElementById('cContent').value == '') {
 		alert('댓글 내용이 없습니다!');
@@ -21,7 +19,6 @@ function comContentBlankCheck() {
 }
 function sortChangeList() {
 	const sort = document.getElementById('board_sort').value;
-	console.log("함수 들어옴");
 	$.ajax({
 		type: 'post',
 		url: '/board/freesort',
@@ -29,7 +26,6 @@ function sortChangeList() {
 		data: sort,
 		success: (data) => {
 			 if (data) {
-			 	console.log("새로고침");
 			 	$('#foreach').load(location.href+' #foreach');
 			 }
 		}

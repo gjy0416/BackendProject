@@ -92,35 +92,3 @@ function refreshInfo() {
 	document.getElementById('eSelect').value = '직접 쓰기';
 	document.getElementById('sumEmail').value = '';
 }
-function sendPost() {
-	if (myPageChangeCheck()) {
-		const param = JSON.stringify({
-		emailAdd: document.getElementById('sumEmail').value,
-		pwd: document.getElementById('pwd1').value
-		});
-		console.log(param);
-		let file = new FormData($('#fileform')[0]);
-		$.ajax({
-			type:'post',
-			enctype: 'multipart/form-data',
-			data: file,
-			processData: false,
-			contentType: false,
-			cache: false,
-			url: '/mypage/infochange/changeimg',
-			success: 
-			function(data) {
-				$.ajax({
-					type:'post',
-					contentType: 'application/json',
-					url: data,
-					data: param,
-					success: location.href='/mypage'
-					
-				});
-			}
-		});
-	}
-	else
-		return false;
-}

@@ -59,7 +59,7 @@ public class securityConfig {
 						@Override
 						public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 							String uri = (String) request.getSession().getAttribute("preUri");
-							if (uri != null)
+							if (uri != null && !uri.contains("mypage"))
 								response.sendRedirect(uri);
 							else
 								response.sendRedirect("/main");

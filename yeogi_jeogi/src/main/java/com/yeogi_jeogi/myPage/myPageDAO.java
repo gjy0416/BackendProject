@@ -18,6 +18,4 @@ public interface myPageDAO {
 	public LinkedList<reservation> getMyAllReservation(int rsvPageNum, int startNum, int lUserNum) throws Exception;
 	public int getRsvPageNum(int lUserNum) throws Exception;
 	public boolean checkMyWritesUserNum(boolean isBf, int bUserNum) throws Exception;
-	public void updateMyInfo(String pwd, String email, int userNum) throws Exception;
-	public void updateMyImg(String imgAdd, int userNum) throws Exception;
 }

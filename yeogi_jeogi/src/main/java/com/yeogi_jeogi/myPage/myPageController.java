@@ -255,6 +255,6 @@ public class myPageController {
 	@PostMapping("/mypage/infochange/change")
 	public String infoChangeSend(@AuthenticationPrincipal loginUserData principal, @ModelAttribute USERS user, @RequestParam MultipartFile profileImg) throws Exception {
 		service.myPageUpdateInfoService(principal, user, profileImg);
-		return "myPage/myPageWrites_bf";
+		return "redirect:/mypage/infochange";
 	}
 }
