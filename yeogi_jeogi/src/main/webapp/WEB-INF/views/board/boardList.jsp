@@ -198,7 +198,23 @@
 	             			<c:set var="maxNum" value="${maxPageNum / pageNum + 1}"/>
 	             		</c:otherwise>
 	             	</c:choose>
-	             	<c:forEach var="i" begin="1" end="${maxNum}" step="1">
+	             	<c:choose>
+	             		<c:when test="${pageColor -5 <= 1}">
+	             			<c:set var="minpage" value="1"/>
+	             		</c:when>
+	             		<c:otherwise>
+	             			<c:set var="minpage" value="${pageColor -5}"/>
+	             		</c:otherwise>
+	             	</c:choose>
+	             	<c:choose>
+	             		<c:when test="${pageColor +5 <= maxNum}">
+	             			<c:set var="maxpage" value="${pageColor +5}"/>
+	             		</c:when>
+	             		<c:otherwise>
+	             			<c:set var="maxpage" value="${maxNum}"/>
+	             		</c:otherwise>
+	             	</c:choose>
+	             	<c:forEach var="i" begin="${minpage}" end="${maxpage}" step="1">
 	             		<c:choose>
 		             		<c:when test="${pageColor == i}">
 		             			<li><a id="pagenumcolor" href="/board/post/${i}">${i}</a></li>
