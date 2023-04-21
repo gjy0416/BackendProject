@@ -252,7 +252,7 @@ public class myPageController {
 	public String infoChangePage() {
 		return "myPage/myPageInfoChange";
 	}
-	@PostMapping("/mypage/infochange/change")
+	@PutMapping("/mypage/infochange/change")
 	public String infoChangeSend(@AuthenticationPrincipal loginUserData principal, @ModelAttribute USERS user, @RequestParam MultipartFile profileImg) throws Exception {
 		service.myPageUpdateInfoService(principal, user, profileImg);
 		return "redirect:/mypage/infochange";

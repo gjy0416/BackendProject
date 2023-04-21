@@ -40,6 +40,7 @@ public class myPageService {
 		return new AsyncResult<myPageAsyncDAO>(asyncDao);
 	}
 	public void myPageUpdateInfoService(loginUserData principal, USERS user, MultipartFile profileImg) throws Exception {
+		System.out.println("service들왔을때 user 비밀번호"+user.getPASSWORD());
 		String fileAdd = "";
 		if (profileImg != null && !profileImg.isEmpty()) {
 			if (!principal.getlImgAdd().equals("/images/myPage/none_user_img.png")) {
@@ -61,10 +62,10 @@ public class myPageService {
 			System.out.println("이미지가 없습니다!");
 		}
 		user.setID(principal.getlUserId());
-		user.setUSER_NO(principal.getlUserNum());
-		user = cdService.updateMyInfo(user);
-		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getID(), user.getPASSWORD()));
-		SecurityContextHolder.getContext().setAuthentication(authentication);
+		user.setPASSWORD(user.getPASSWORD().replace(",", ""));
+		System.out.println("들가기전 셋id하고 user비밀번호"+user.getID()+user.getPASSWORD());
+		USERS user2 = cdService.updateMyInfo(user);
+		System.out.println("들간 후셋id하고 user비밀번호"+user.getID()+user.getPASSWORD());
 	}
 
 }

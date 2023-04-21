@@ -28,14 +28,22 @@ public class customUserDetailsService implements UserDetailsService {
 		USERS persistance = repository.findByID(user.getID()).orElseThrow(() -> {
 			return new IllegalArgumentException("회원 찾기 실패");
 		});
-		String rawPwd = user.getPASSWORD();
-		System.out.println("pwd : "+user.getPASSWORD()+"email : "+user.getEMAIL()+"img_add :"+user.getIMG_ADD());
-		if (rawPwd != null && !rawPwd.isEmpty())
-			persistance.setPASSWORD(encoder.encode(rawPwd));
-		if (user.getEMAIL() != null && !user.getEMAIL().isEmpty())
+		System.out.println("user 비밀번호"+user.getPASSWORD()+"persistance 비밀번호"+persistance.getPASSWORD());
+		if (user.getPASSWORD() != null && !user.getPASSWORD().isEmpty()) {
+			System.out.println("비밀번호 발견");
+			persistance.setPASSWORD(encoder.encode(user.getPASSWORD()));
+		}
+		if (user.getEMAIL() != null && !user.getEMAIL().isEmpty()) {
+			System.out.println("이메일 발견");
 			persistance.setEMAIL(user.getEMAIL());
-		if (user.getIMG_ADD() != null && !user.getIMG_ADD().isEmpty())
+		}
+		if (user.getIMG_ADD() != null && !user.getIMG_ADD().isEmpty()) {
+			System.out.println("이미지 발견");
 			persistance.setIMG_ADD(user.getIMG_ADD());
-		return user;
+		}
+		user.setPASSWORD(persistance.getPASSWORD());
+		user.setEMAIL(persistance.getEMAIL());
+		user.setIMG_ADD(persistance.getIMG_ADD());
+		return persistance;
 	}
 }

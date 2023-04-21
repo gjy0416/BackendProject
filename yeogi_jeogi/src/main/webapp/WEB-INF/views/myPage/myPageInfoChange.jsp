@@ -39,6 +39,7 @@
 			</div>
 			<div id="info_change_content">
 				<form id="fileform" method="post" action="/mypage/infochange/change" enctype="multipart/form-data" onsubmit="return myPageChangeCheck()">
+					<input type="hidden" name="_method" value="put">
 					<div id="wrap_content">
 						<span>비밀번호 변경</span>
 						<label class="input">비밀번호</label><input id="pwd1" name="PASSWORD" type="password"><br>
@@ -64,6 +65,6 @@
 		</div>
 	</div>
 	<%@include file="../footer.jsp" %>	
-	<script src="/js/myPage/myPage.js"></script>
+	<script src="/js/myPage/myPageInfoChange.js"></script>
 </body>
 </html>
