@@ -105,7 +105,7 @@
 	                	      </c:otherwise>
                 	      </c:choose>
                 	  </div>
-                	  <span>${principal.getlUserId()}</span>
+                	  <span>${principal.getUsername()}</span>
 	                	  <c:choose>
 	                	  <c:when test="${principal != null}">
 		                	  <div id="comment_write">

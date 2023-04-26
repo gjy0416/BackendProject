@@ -23,7 +23,7 @@
 	                </select>
 	            </div>
 	            <textarea id="content_text" name="bContent" placeholder="내용을 입력해주세요" style="width: 100%; min-height: 500px;"></textarea>
-	            <input id="test1" type="hidden" name="bUserId" value="${principal.getlUserId()}">
+	            <input id="test1" type="hidden" name="bUserId" value="${principal.getUsername()}">
 	            <div id="wrap_button">
 	                <button type="submit">글 등록하기</button>
 	            </div>

@@ -3,14 +3,15 @@ package com.yeogi_jeogi.myPage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
 import com.yeogi_jeogi.board.board;
 import com.yeogi_jeogi.board.boardComment;
 import com.yeogi_jeogi.jdbc.connClass;
+import com.yeogi_jeogi.login.CHANGEABLEUSERS;
 import com.yeogi_jeogi.reservation.reservation;
 
 @Repository
@@ -339,5 +340,71 @@ public class myPageDAOImpl implements myPageDAO {
 		}
 		connClass.close(conn, pstmt, rs);
 		return true;
+	}
+	@Override
+	public void updateChangeableInfo(CHANGEABLEUSERS user) throws Exception {
+		ArrayList<String> sqlList = new ArrayList<String>();
+		int i = 0;
+		boolean plusComma = false;
+		Connection conn = connClass.open();
+		String plusSql = "";
+		if (user.getEMAIL() != null && !user.getEMAIL().isEmpty()) {
+			plusSql += "EMAIL = ?";
+			i++;
+			plusComma = true;
+			sqlList.add(user.getEMAIL());
+		}
+		if (user.getPHONE() != null && !user.getPHONE().isEmpty()) {
+			if (plusComma) {
+				plusSql += ",";
+			}
+			plusSql += "PHONE = ?";
+			i++;
+			plusComma = true;
+			sqlList.add(user.getPHONE());
+		}
+		if (user.getMBTI() != null && !user.getMBTI().isEmpty()) {
+			if (plusComma) {
+				plusSql += ",";
+			}
+			plusSql += "MBTI = ?";
+			i++;
+			plusComma = true;
+			sqlList.add(user.getMBTI());
+		}
+		if (user.getIMG_ADD() != null && !user.getIMG_ADD().isEmpty()) {
+			if (plusComma) {
+				plusSql += ",";
+			}
+			plusSql += "IMG_ADD = ?";
+			i++;
+			sqlList.add(user.getIMG_ADD());
+		}
+		String sql = "UPDATE USERS SET "+plusSql+" WHERE ID = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		for (int j = 0; j < i; j++) {
+			pstmt.setString(j, sqlList.get(j));
+		}
+		pstmt.setString(i, user.getID());
+		pstmt.executeUpdate();
+		pstmt.close();
+		conn.close();
+	}
+	@Override
+	public CHANGEABLEUSERS getMyChangeableInfo(String id) throws Exception {
+		CHANGEABLEUSERS cUser = new CHANGEABLEUSERS();
+		String sql = "SELECT EMAIL, PHONE, MBTI, IMG_ADD FROM USERS WHERE ID = ?";
+		Connection conn = connClass.open();
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		ResultSet rs = pstmt.executeQuery();
+		rs.next();
+		cUser.setEMAIL(rs.getString("EMAIL"));
+		cUser.setPHONE(rs.getString("PHONE"));
+		cUser.setMBTI(rs.getString("MBTI"));
+		cUser.setIMG_ADD(rs.getString("IMG_ADD"));
+		connClass.close(conn, pstmt, rs);
+		return cUser;
 	}
 }

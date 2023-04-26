@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import com.yeogi_jeogi.board.board;
 import com.yeogi_jeogi.board.boardComment;
+import com.yeogi_jeogi.login.CHANGEABLEUSERS;
 import com.yeogi_jeogi.reservation.reservation;
 
 public interface myPageDAO {	
@@ -18,4 +19,6 @@ public interface myPageDAO {
 	public LinkedList<reservation> getMyAllReservation(int rsvPageNum, int startNum, int lUserNum) throws Exception;
 	public int getRsvPageNum(int lUserNum) throws Exception;
 	public boolean checkMyWritesUserNum(boolean isBf, int bUserNum) throws Exception;
+	public void updateChangeableInfo(CHANGEABLEUSERS user) throws Exception;
+	public CHANGEABLEUSERS getMyChangeableInfo(String id) throws Exception;
 }

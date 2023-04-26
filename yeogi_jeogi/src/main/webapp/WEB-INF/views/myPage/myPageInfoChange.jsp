@@ -56,6 +56,8 @@
 							<option>google.com</option>
 						</select>
 						<input type="hidden" id="sumEmail" name="EMAIL" value="">
+						<input type="hidden" name="PHONE" value="">
+						<input type="hidden" name="MBTI" value="">
 					</div>
 					<div id="wrap_button">
 						<button type="button" onclick="refreshInfo()">초기화</button><button type="submit">적용</button>

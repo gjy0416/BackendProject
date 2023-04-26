@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.yeogi_jeogi.board.board;
 import com.yeogi_jeogi.board.boardComment;
+import com.yeogi_jeogi.login.CHANGEABLEUSERS;
 import com.yeogi_jeogi.login.USERS;
 import com.yeogi_jeogi.login.loginUserData;
 import com.yeogi_jeogi.reservation.reservation;
@@ -33,7 +34,8 @@ public class myPageController {
 	final myPageService service;
 	
 	@GetMapping("/mypage")
-	public String myPagePage(@AuthenticationPrincipal loginUserData principal, HttpSession Session, Model m) {
+	public String myPagePage(@AuthenticationPrincipal loginUserData principal, HttpSession Session, Model m) throws Exception {
+		changeableInfoSet(principal, Session);
 		return myPageWrites_bf(principal, 1, Session, m);
 	}
 
@@ -248,13 +250,27 @@ public class myPageController {
 		}
 		return "myPage/myPageFail";
 	}
+	@GetMapping("/mypage/infochangesuccess")
+	public String infoChangeSuccessPage() {
+		return "myPage/infoChangeSuccess";
+	}
 	@GetMapping("/mypage/infochange")
 	public String infoChangePage() {
 		return "myPage/myPageInfoChange";
 	}
 	@PutMapping("/mypage/infochange/change")
-	public String infoChangeSend(@AuthenticationPrincipal loginUserData principal, @ModelAttribute USERS user, @RequestParam MultipartFile profileImg) throws Exception {
-		service.myPageUpdateInfoService(principal, user, profileImg);
-		return "redirect:/mypage/infochange";
+	public String infoChangeSend(@AuthenticationPrincipal loginUserData principal, @RequestParam String PASSWORD, @RequestParam String EMAIL, @RequestParam String PHONE, @RequestParam String MBTI, @RequestParam MultipartFile profileImg, HttpSession session) throws Exception {
+		CHANGEABLEUSERS cUser = (CHANGEABLEUSERS) session.getAttribute("changeableInfo");
+		service.myPageUpdateInfoService(principal, cUser, PASSWORD, EMAIL, PHONE, MBTI, profileImg, session);
+		return "redirect:/mypage/infochangesuccess";
+	}
+	public boolean changeableInfoCheck(HttpSession session) {
+		if (session.getAttribute("changeableInfo") == null)
+			return false;
+		return true;
+	}
+	public void changeableInfoSet(loginUserData principal, HttpSession session) throws Exception {
+		CHANGEABLEUSERS cUser = service.getChangeableInfo(principal.getUsername());
+		session.setAttribute("changeableInfo", cUser);
 	}
 }

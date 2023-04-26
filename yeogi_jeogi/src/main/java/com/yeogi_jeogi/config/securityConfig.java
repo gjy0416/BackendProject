@@ -1,7 +1,6 @@
 package com.yeogi_jeogi.config;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +14,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -25,10 +22,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.yeogi_jeogi.login.USERS;
-import com.yeogi_jeogi.login.UserRepository;
-import com.yeogi_jeogi.login.customAuthenticationToken;
-
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -36,7 +29,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class securityConfig {
 	
-	final UserRepository repository;
 	@Bean
    public PasswordEncoder passwordEncoder() {
        return new BCryptPasswordEncoder();
@@ -55,14 +47,13 @@ public class securityConfig {
 //			.authenticationManager(new AuthenticationManager() {
 //				@Override
 //				public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-//					USERS user = repository.findByID(authentication.getName()).orElseThrow(() -> {
-//						return new IllegalArgumentException("회원 찾기 실패");
-//					});
-//					ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
-//					auth.add(new SimpleGrantedAuthority("ROLE_"+user.getROLE()));
-//					System.out.println("아이디"+user.getID()+"비번"+user.getPASSWORD());
-//					
-//					return new customAuthenticationToken(user, user.getPASSWORD(), user.getIMG_ADD(), auth);
+//					String rawPwd = (String) authentication.getCredentials();
+//					String encodePwd = passwordEncoder().encode(rawPwd);
+//					System.out.println("비교들어감");
+//					if (!passwordEncoder().matches(rawPwd, encodePwd)) {
+//						throw new BadCredentialsException("비밀번호 틀림!");
+//					}					
+//					return new customAuthenticationToken((String) authentication.getName(), (String) authentication.getCredentials(), "");
 //				}
 //			})
 			.authorizeRequests()

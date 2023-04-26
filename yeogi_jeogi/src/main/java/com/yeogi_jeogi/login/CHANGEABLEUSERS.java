@@ -6,45 +6,29 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Entity(name="USERS")
+@Entity(name="CHANGEABLEUSERS")
 @Table(name="USERS")
-public class USERS {
+public class CHANGEABLEUSERS {
 	
 	@Id
-	private int USER_NO;
-	
-	@Column
-	private int GRADE_NO;
-	
 	@Column
 	private String ID;
 	
 	@Column
-	private String NAME;
+	private String EMAIL;
 	
 	@Column
-	private String PASSWORD;
-	
-//	@Column
-//	private String EMAIL;
-//	
-//	@Column
-//	private String PHONE;
-//	
-//	@Column
-//	private String MBTI;
+	private String PHONE;
 	
 	@Column
-	private String ROLE;
+	private String MBTI;
 	
-//	@Column
-//	private String IMG_ADD;
+	@Column
+	private String IMG_ADD;
 }

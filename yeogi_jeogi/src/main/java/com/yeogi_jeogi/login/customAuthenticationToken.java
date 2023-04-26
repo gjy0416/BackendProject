@@ -1,19 +1,16 @@
 package com.yeogi_jeogi.login;
 
-import java.util.Collection;
-
 import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
 
 public class customAuthenticationToken extends AbstractAuthenticationToken {
 	
 	private static final long serialVersionUID = -6231225291766414883L;
-	private USERS principal;
+	private Object principal;
 	private String credential;
    private String imgAdd;
    
-	public customAuthenticationToken(USERS user, String pwd, String imgAdd, Collection<? extends GrantedAuthority> authorities) {
-		super(authorities);
+	public customAuthenticationToken(Object user, String pwd, String imgAdd) {
+		super(null);
 		this.principal = user;
 		this.credential = pwd;
 		this.imgAdd = imgAdd;
@@ -23,7 +20,7 @@ public class customAuthenticationToken extends AbstractAuthenticationToken {
 		return credential;
 	}
 	@Override
-	public USERS getPrincipal() {
+	public Object getPrincipal() {
 		return principal;
 	}
 	public String getImgAdd() {

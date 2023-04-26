@@ -21,10 +21,10 @@
 	</div>
 	<div id="myinfo">
 		<div id="info_left">
-			<img src="${principal.getlImgAdd()}">
+			<img src="${changeableInfo.getIMG_ADD()}">
 			<div>
-				<span>${principal.getlUserId()}님 반갑습니다!</span>
-				<span>내 MBTI: ${principal.getlMbti()}</span>
+				<span>${principal.getUsername()}님 반갑습니다!</span>
+				<span>내 MBTI: ${changeableInfo.getMBTI()}</span>
 			</div>
 		</div>
 		<table>

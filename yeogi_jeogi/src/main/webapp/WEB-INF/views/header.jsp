@@ -32,7 +32,7 @@
                   	 <li><a href="/logout">로그아웃</a></li>
                    </sec:authorize>
                    <!-- <li><a href="../수정/Login.html">회원가입</a></li> -->
-                   <li><a href="/mypage/bfwrites">마이페이지</a></li>
+                   <li><a href="/mypage">마이페이지</a></li>
                    <li><a href="">고객센터</a></li>
                </ul>
            </div>

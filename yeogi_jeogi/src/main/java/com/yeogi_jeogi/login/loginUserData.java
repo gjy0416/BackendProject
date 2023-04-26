@@ -3,6 +3,8 @@ package com.yeogi_jeogi.login;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.Transient;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,23 +21,8 @@ public class loginUserData implements UserDetails {
 	public int getlGradeNum() {
 		return user.getGRADE_NO();
 	}
-	public String getlUserId() {
-		return user.getID();
-	}
 	public String getlName() {
-		return getUsername();
-	}
-	public String getlEmail() {
-		return user.getEMAIL();
-	}
-	public String getlPhone() {
-		return user.getPHONE();
-	}
-	public String getlMbti() {
-		return user.getMBTI();
-	}
-	public String getlImgAdd() {
-		return user.getIMG_ADD();
+		return user.getNAME();
 	}
 	public String getlRole() {
 		return user.getROLE();
