@@ -4,12 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 수정 완료</title>
 </head>
 <body>
 	<script>
 		alert('회원 수정이 완료되었습니다!');
-		window.location.href = "/mypage/infochange";
+		setTimeout(() => {
+			window.location.href = "/mypage/infochange";
+		}, 1000);
 	</script>
 </body>
 </html>

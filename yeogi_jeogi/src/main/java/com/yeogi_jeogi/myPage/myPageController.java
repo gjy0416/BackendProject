@@ -34,13 +34,14 @@ public class myPageController {
 	final myPageService service;
 	
 	@GetMapping("/mypage")
-	public String myPagePage(@AuthenticationPrincipal loginUserData principal, HttpSession Session, Model m) throws Exception {
-		changeableInfoSet(principal, Session);
-		return myPageWrites_bf(principal, 1, Session, m);
+	public String myPagePage(@AuthenticationPrincipal loginUserData principal, HttpSession session, Model m) throws Exception {
+		changeableInfoSet(principal, session);
+		return myPageWrites_bf(principal, 1, session, m);
 	}
 
 	@GetMapping("/mypage/wants")
-	public String myPageWants(@AuthenticationPrincipal loginUserData principal, HttpSession session, Model m) {
+	public String myPageWants(@AuthenticationPrincipal loginUserData principal, HttpSession session, Model m) throws Exception {
+		changeableInfoSet(principal, session);
 		if (principal != null) {
 			try {
 				myPage mp = service.myPageNService().getMyInfo(principal.getlUserNum());
@@ -61,12 +62,13 @@ public class myPageController {
 	}
 
 	@GetMapping("/mypage/bfwrites")
-	public String myPageWrites_bf(@AuthenticationPrincipal loginUserData principal, HttpSession session, Model m, Principal pc) {
+	public String myPageWrites_bf(@AuthenticationPrincipal loginUserData principal, HttpSession session, Model m) throws Exception {
 		return myPageWrites_bf(principal, 1, session, m);
 	}
 
 	@GetMapping("/mypage/bfwrites/{startNum}")
-	public String myPageWrites_bf(@AuthenticationPrincipal loginUserData principal, @PathVariable int startNum, HttpSession session, Model m) {
+	public String myPageWrites_bf(@AuthenticationPrincipal loginUserData principal, @PathVariable int startNum, HttpSession session, Model m) throws Exception {
+		changeableInfoSet(principal, session);
 		if (principal != null) {
 			try {
 				myPage mp = service.myPageNService().getMyInfo(principal.getlUserNum());
@@ -87,12 +89,13 @@ public class myPageController {
 	}
 
 	@GetMapping("/mypage/btwrites")
-	public String myPageWrites_bt(@AuthenticationPrincipal loginUserData principal, HttpSession session, Model m) {
+	public String myPageWrites_bt(@AuthenticationPrincipal loginUserData principal, HttpSession session, Model m) throws Exception {
 		return myPageWrites_bt(principal, 1, session, m);
 	}
 
 	@GetMapping("/mypage/btwrites/{startNum}")
-	public String myPageWrites_bt(@AuthenticationPrincipal loginUserData principal, @PathVariable int startNum, HttpSession session, Model m) {
+	public String myPageWrites_bt(@AuthenticationPrincipal loginUserData principal, @PathVariable int startNum, HttpSession session, Model m) throws Exception {
+		changeableInfoSet(principal, session);
 		if (principal != null) {
 			try {
 				myPage mp = service.myPageNService().getMyInfo(principal.getlUserNum());
@@ -160,12 +163,13 @@ public class myPageController {
 		return "myPage/myPageFail";
 	}
 	@GetMapping("mypage/coms")
-	public String myCommentsList(@AuthenticationPrincipal loginUserData principal, HttpSession session, Model m) {
+	public String myCommentsList(@AuthenticationPrincipal loginUserData principal, HttpSession session, Model m) throws Exception {
 		return myCommentsList(principal, 1, session, m);
 	}
 
 	@GetMapping("mypage/coms/{startNum}")
-	public String myCommentsList(@AuthenticationPrincipal loginUserData principal, @PathVariable int startNum, HttpSession session, Model m) {
+	public String myCommentsList(@AuthenticationPrincipal loginUserData principal, @PathVariable int startNum, HttpSession session, Model m) throws Exception {
+		changeableInfoSet(principal, session);
 		int pageNum = 8;
 		if (principal != null) {
 			try {
@@ -208,7 +212,8 @@ public class myPageController {
 	}
 
 	@GetMapping("/mypage/reservations/{startNum}")
-	public String myPageReservations(@AuthenticationPrincipal loginUserData principal, @PathVariable int startNum, HttpSession session, Model m) {
+	public String myPageReservations(@AuthenticationPrincipal loginUserData principal, @PathVariable int startNum, HttpSession session, Model m) throws Exception {
+		changeableInfoSet(principal, session);
 		if (principal != null) {
 			try {
 				int pageNum = 8;
@@ -229,7 +234,7 @@ public class myPageController {
 	}
 
 	@GetMapping("/mypage/reservations")
-	public String myPageReservations(@AuthenticationPrincipal loginUserData principal, HttpSession session, Model m) {
+	public String myPageReservations(@AuthenticationPrincipal loginUserData principal, HttpSession session, Model m) throws Exception {
 		return myPageReservations(principal, 1, session, m);
 	}
 
@@ -255,7 +260,8 @@ public class myPageController {
 		return "myPage/infoChangeSuccess";
 	}
 	@GetMapping("/mypage/infochange")
-	public String infoChangePage() {
+	public String infoChangePage(@AuthenticationPrincipal loginUserData principal, HttpSession session) throws Exception {
+		changeableInfoSet(principal, session);
 		return "myPage/myPageInfoChange";
 	}
 	@PutMapping("/mypage/infochange/change")
@@ -263,11 +269,6 @@ public class myPageController {
 		CHANGEABLEUSERS cUser = (CHANGEABLEUSERS) session.getAttribute("changeableInfo");
 		service.myPageUpdateInfoService(principal, cUser, PASSWORD, EMAIL, PHONE, MBTI, profileImg, session);
 		return "redirect:/mypage/infochangesuccess";
-	}
-	public boolean changeableInfoCheck(HttpSession session) {
-		if (session.getAttribute("changeableInfo") == null)
-			return false;
-		return true;
 	}
 	public void changeableInfoSet(loginUserData principal, HttpSession session) throws Exception {
 		CHANGEABLEUSERS cUser = service.getChangeableInfo(principal.getUsername());

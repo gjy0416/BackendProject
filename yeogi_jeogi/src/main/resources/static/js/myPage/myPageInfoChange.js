@@ -22,7 +22,14 @@ function emailSelect() {
 		eInput2.value = eSelect;
 	}
 }
+function focusOut() {
+	document.getElementById('pwd1').blur();
+	document.getElementById('pwd2').blur();
+	document.getElementById('email1').blur();
+	document.getElementById('email2').blur();
+}
 function myPageChangeCheck() {
+	focusOut();
 	const pwd1 = document.getElementById('pwd1').value;
 	const pwd2 = document.getElementById('pwd2').value;
 	const email1 = document.getElementById('email1').value;
